@@ -1,0 +1,19 @@
+type: drupal11
+docroot: docroot
+name: drupal-local
+
+php_version: "8.3"
+webimage_extra_packages: [apt-utils]
+database:
+  type: mysql
+  version: "8.0"
+corepack_enable: true
+
+upload_dirs: [sites/default/files, ../files-private]
+
+hooks:
+  pre-start:
+    - exec-host: ddev config global --instrumentation-opt-in=false
+    - exec-host: ddev add-on list --installed | grep -q ddev-selenium-standalone-chrome || ddev add-on get ddev/ddev-selenium-standalone-chrome
+  post-start:
+    - exec: export PHP_IDE_CONFIG="serverName=${VIRTUAL_HOST}"

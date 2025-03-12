@@ -1,0 +1,101 @@
+{
+  "name": "drupal/project",
+  "license": "GPL-2.0-or-later",
+  "version": "11.x-dev",
+  "require": {
+    "composer/installers": "*",
+    "cweagans/composer-patches": "*",
+    "drupal/admin_toolbar": "*",
+    "drupal/core-composer-scaffold": "*",
+    "drupal/gin": "*",
+    "drupal/gin_toolbar": "*",
+    "drush/drush": "*",
+    "wikimedia/composer-merge-plugin": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "drupal/core-composer-scaffold": true,
+      "drupal/core-project-message": true,
+      "drupal/core-vendor-hardening": true,
+      "php-http/discovery": true,
+      "phpstan/extension-installer": true,
+      "tbachert/spi": true,
+      "wikimedia/composer-merge-plugin": true
+    },
+    "sort-packages": true
+  },
+  "extra": {
+    "merge-plugin": {
+      "include": [
+        "docroot/composer.json"
+      ]
+    },
+    "drupal-scaffold": {
+      "file-mapping": {
+        "[web-root]/sites/default/default.services.yml": {
+          "mode": "replace",
+          "overwrite": false,
+          "path": "docroot/core/assets/scaffold/files/default.services.yml"
+        },
+        "[web-root]/sites/default/default.settings.php": {
+          "mode": "replace",
+          "overwrite": false,
+          "path": "docroot/core/assets/scaffold/files/default.settings.php"
+        }
+      },
+      "gitignore": true,
+      "locations": {
+        "web-root": "docroot/"
+      }
+    },
+    "installer-paths": {
+      "docroot/core": [
+        "type:drupal-core"
+      ],
+      "docroot/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "docroot/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "docroot/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "docroot/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "docroot/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "docroot/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "enable-patching": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "patches": {}
+  },
+  "repositories": {
+    "drupal": {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    "drupal/core": {
+      "type": "path",
+      "url": "docroot/core",
+      "options": {
+        "symlink": true
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

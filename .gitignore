@@ -1,0 +1,15 @@
+.gitattributes
+
+.ddev/*
+!.ddev/php
+!.ddev/php/99-php.ini
+!.ddev/config.yaml
+
+.editorconfig
+
+recipes/
+vendor/
+docroot/
+
+composer.*
+yarn.lock
